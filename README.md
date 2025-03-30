@@ -5,7 +5,7 @@
 - C#
 - .NET
 
----
+
 
 ## 🎮 Como Jogar
 1️⃣ O jogo embaralha e distribui as cartas.
@@ -14,6 +14,6 @@
 4️⃣ Quem tiver o maior valor vence a rodada e ganha a carta do oponente.
 5️⃣ O jogo termina quando um jogador ficar com todas as cartas!
 
----
+
 
 🔗 Clone este repositório, contribua e divirta-se! 🚀
