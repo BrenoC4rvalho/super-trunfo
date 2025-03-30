@@ -50,8 +50,31 @@ namespace super_trunfo.core
             cartas.Add(new Carta("D5", "Tigre", 1, 1, 1, 1));
             cartas.Add(new Carta("D6", "Urso", 1, 1, 1, 1));
             cartas.Add(new Carta("D7", "Veado", 1, 1, 1, 1));
-            cartas.Add(new Carta("D8", "Vaca", 1, 1, 1, 1))
+            cartas.Add(new Carta("D8", "Vaca", 1, 1, 1, 1));
         }
+
+        public Carta GetCartaAleatório()
+        {
+            if(cartas.Count == 0)
+            {
+                return null;
+            }
+
+            Random random = new Random();
+            int index = random.Next(cartas.Count);
+
+            Carta cartaSelecionada = cartas[index];
+            cartas.RemoveAt(index);
+
+            return cartaSelecionada;
+        }
+
+        public int QuantidadeDeCartas()
+        {   
+            return cartas.Count();
+        }
+
+
 
     }
 }
