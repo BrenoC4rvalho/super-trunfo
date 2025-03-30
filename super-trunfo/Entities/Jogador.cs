@@ -9,6 +9,7 @@ namespace super_trunfo.Entities
     class Jogador
     {
         private string nome;
+        private Queue<Carta> cartas = new Queue<Carta>();
 
         public Jogador(string nome)
         {
@@ -24,6 +25,22 @@ namespace super_trunfo.Entities
         {
             this.nome = nome;
         }
+
+        public Carta GetCarta()
+        {
+            return cartas.Dequeue();
+        }
+
+        public void SetCarta(Carta carta)
+        {
+            cartas.Enqueue(carta);
+        }   
+
+        public int quantidadeDeCartas()
+        {
+            return cartas.Count();
+        }
+
     }
 
 }
