@@ -5,6 +5,8 @@ VisualStudioVersion = 17.13.35806.99 d17.13
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "super-trunfo", "super-trunfo\super-trunfo.csproj", "{D65D656D-68E8-4082-A5B3-4F0D63A8F04B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{1C7F7C6A-4398-4BE3-BA62-27560A118653}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{D65D656D-68E8-4082-A5B3-4F0D63A8F04B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D65D656D-68E8-4082-A5B3-4F0D63A8F04B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D65D656D-68E8-4082-A5B3-4F0D63A8F04B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C7F7C6A-4398-4BE3-BA62-27560A118653}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C7F7C6A-4398-4BE3-BA62-27560A118653}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C7F7C6A-4398-4BE3-BA62-27560A118653}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C7F7C6A-4398-4BE3-BA62-27560A118653}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
