@@ -46,6 +46,11 @@ namespace super_trunfo.core
             }
         }
 
+        public Jogador JogadorDaRodada()
+        {
+            return jogadores.Peek();
+        }
+
         public int JogarCartaJogador(Jogador jogador)
         {
             if(jogador.GetRobo())
@@ -113,6 +118,25 @@ namespace super_trunfo.core
                 jogadores.Enqueue(jogadorAtual);
             }
 
+        }
+
+        public Jogador Rodada()
+        {
+            Jogador vencedor;
+            foreach(var jogador in jogadores)
+            {
+
+            }
+
+            return vencedor;
+        }
+
+        public void GanhadorReceberCartas(Jogador jogador)
+        {
+            foreach(var carta in cartasJogadas )
+            {
+                jogador.SetCarta(carta);
+            }
         }
 
         public Jogador? VerificaFimDeJogo()

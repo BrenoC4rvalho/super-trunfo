@@ -35,9 +35,20 @@ while (jogoAtivo)
 
     while(superTrunfo.VerificaFimDeJogo() == null)
     {
-        
+        if(superTrunfo.JogadorDaRodada().GetRobo())
+        {
+            superTrunfo.JogarCartaRobo(superTrunfo.JogadorDaRodada());
+        } else
+        {
+            superTrunfo.JogarCartaJogador(superTrunfo.JogadorDaRodada());
+        }
+
+        // fazer a parte de vê quem é o vencedor da rodada
+        // fazer remover jogador com carta menor que zero
+
 
         LimpezaTerminal();
+        break;
     }
 
  
