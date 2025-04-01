@@ -29,17 +29,20 @@ while (jogoAtivo)
         superTrunfo.SetJogador(new Jogador($"Bicho Doido {i + 1}", true));
     }
 
+    superTrunfo.SorteaOrdemInicial();
+
     superTrunfo.DistribuirCartas();
 
-    while (superTrunfo.VerificaFimDeJogo() == null)
-    {
-        superTrunfo.Rodada();
-        LimpezaTerminal();
-    }
+    //while (superTrunfo.VerificaFimDeJogo() == null)
+    //{
+    //    superTrunfo.Rodada();
+    //    LimpezaTerminal();
+    //}
 
     Console.WriteLine("Deseja jogar novamente? (s/n)");
     string? resposta = Console.ReadLine()?.Trim().ToLower();
     jogoAtivo = (resposta == "s");
+
 }
 
 void LimpezaTerminal()
