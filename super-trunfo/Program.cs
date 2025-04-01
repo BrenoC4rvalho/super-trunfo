@@ -33,11 +33,14 @@ while (jogoAtivo)
 
     superTrunfo.DistribuirCartas();
 
-    //while (superTrunfo.VerificaFimDeJogo() == null)
-    //{
-    //    superTrunfo.Rodada();
-    //    LimpezaTerminal();
-    //}
+    while(superTrunfo.VerificaFimDeJogo() == null)
+    {
+        
+
+        LimpezaTerminal();
+    }
+
+ 
 
     Console.WriteLine("Deseja jogar novamente? (s/n)");
     string? resposta = Console.ReadLine()?.Trim().ToLower();

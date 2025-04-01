@@ -13,6 +13,8 @@ namespace super_trunfo.core
         private Baralho baralho = new Baralho();
         private List<Carta> cartasJogadas = new List<Carta>();
 
+        private static Random random = new Random();
+
         public Game()
         {
             baralho.JogoDoBicho();
@@ -44,14 +46,51 @@ namespace super_trunfo.core
             }
         }
 
+        public int JogarCartaJogador(Jogador jogador)
+        {
+            if(jogador.GetRobo())
+            {
+                throw new Exception("O jogador é um robô e não pode jogar cartas no lugar de um jogador.");
+            }
+
+            while(true)
+            {
+
+                Console.WriteLine($"É a vez de {jogador.GetNome()} jogar.");
+                Console.WriteLine("Selecione um atributo:");
+                jogador.GetCarta().PrintCarta();
+                if(int.TryParse(Console.ReadLine(), out int atributoEscolhido) && atributoEscolhido >= 1 && atributoEscolhido <= 4)
+                {
+                    return atributoEscolhido;
+                }
+
+                Console.WriteLine("Entrada inválida! Digite um número entre 1 e 4.");
+
+            }
+            
+
+        }
+
+        public int JogarCartaRobo(Jogador jogador)
+        {
+            if (!jogador.GetRobo())
+            {
+                throw new Exception("O jogador não é um robô e não pode jogar cartas no lugar de um robô.");
+            }
+
+            Console.WriteLine($"É a vez de {jogador.GetNome()} jogar.");
+            jogador.GetCarta().PrintCarta();
+            int atributoEscolhido = random.Next(1, 5);
+            return atributoEscolhido;
+
+        }
+
         public void SorteaOrdemInicial()
         {
             if(jogadores.Count <= 1)
             {
                 Console.WriteLine("É necessário ter mais de um jogador para sortear a ordem inicial");
             }
-
-            Random random = new Random();
 
             // Converte a fila para uma lista e embaralha
             var jogadoresEmbaralhados = jogadores.OrderBy(j => random.Next()).ToList();
@@ -74,10 +113,6 @@ namespace super_trunfo.core
                 jogadores.Enqueue(jogadorAtual);
             }
 
-        }
-
-        public void Rodada()
-        {
         }
 
         public Jogador? VerificaFimDeJogo()

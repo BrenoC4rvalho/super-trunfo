@@ -85,5 +85,15 @@ namespace super_trunfo.Entities
             this.atributo4 = atributo4;
         }
 
+        public void PrintCarta()
+        {
+            Console.WriteLine($"Categoria: {categoria}");
+            Console.WriteLine($"Nome: {nome}");
+            Console.WriteLine($"1 - Atributo 1: {atributo1}");
+            Console.WriteLine($"2 - Atributo 2: {atributo2}");
+            Console.WriteLine($"3 - Atributo 3: {atributo3}");
+            Console.WriteLine($"4 - Atributo 4: {atributo4}");
+        }
+
     }
 }
