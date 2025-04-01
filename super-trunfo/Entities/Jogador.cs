@@ -40,13 +40,18 @@ namespace super_trunfo.Entities
 
         public Carta GetCarta()
         {
-            return cartas.Dequeue();
+            return cartas.Peek();
         }
 
         public void SetCarta(Carta carta)
         {
             cartas.Enqueue(carta);
-        }   
+        } 
+        
+        public Carta RetirarCarta()
+        {
+            return cartas.Dequeue();
+        }
 
         public int quantidadeDeCartas()
         {
