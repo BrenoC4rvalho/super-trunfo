@@ -10,7 +10,7 @@ namespace super_trunfo.utils
     {
         public static void ImprimirRegra()
         {
-            Console.WriteLine();
+            Console.WriteLine("Regra aqui");
         }
     }
 }
