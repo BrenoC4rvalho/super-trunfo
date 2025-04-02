@@ -16,7 +16,7 @@ namespace super_trunfo.Entities
         private int atributo3;
         private int atributo4;
 
-        public Carta(string nome, string categoria, int atributo1, int atributo2, int atributo3, int atributo4)
+        public Carta(string categoria, string nome, int atributo1, int atributo2, int atributo3, int atributo4)
         {
             this.nome = nome;
             this.categoria = categoria;

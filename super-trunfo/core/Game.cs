@@ -187,18 +187,28 @@ namespace super_trunfo.core
 
         public void RemoverJogadorSemCartas()
         {
-            foreach (var jogador in jogadores)
+            int jogadoresIniciais = jogadores.Count;
+
+            Queue<Jogador> novaFila = new Queue<Jogador>();
+
+            while (jogadores.Count > 0)
             {
-                if (jogador.quantidadeDeCartas() == 0)
+                Jogador jogador = jogadores.Dequeue();
+                if (jogador.quantidadeDeCartas() > 0)
                 {
-                    jogadores.Dequeue();
+                    novaFila.Enqueue(jogador);
+                }
+                else
+                {
                     Console.WriteLine($"O jogador {jogador.GetNome()} foi removido por não ter mais cartas.");
                 }
             }
+
+            jogadores = novaFila;
         }
         public Jogador? VerificaFimDeJogo()
         {
-           if(jogadores.Count == 1)
+            if (jogadores.Count == 1)
            {
                 return jogadores.Peek();
            }

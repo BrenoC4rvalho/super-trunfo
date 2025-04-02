@@ -50,7 +50,6 @@ while (jogoAtivo)
         superTrunfo.RemoverJogadorSemCartas();
         superTrunfo.ProximoJogador();
         LimpezaTerminal();
-        break;
     }
 
  
