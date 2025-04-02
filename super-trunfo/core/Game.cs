@@ -120,14 +120,60 @@ namespace super_trunfo.core
 
         }
 
-        public Jogador Rodada()
+        public Jogador Rodada(int atributo)
         {
-            Jogador vencedor;
-            foreach(var jogador in jogadores)
+            if (jogadores.Count == 0)
             {
+                throw new InvalidOperationException("Não há jogadores suficientes para a rodada.");
+            }
+
+            Jogador vencedor = null;
+            int maiorValorAtributo = int.MinValue;
+
+            Console.WriteLine("Cartas jogadas:");
+
+            foreach (var jogador in jogadores)
+            {
+                Carta carta = jogador.GetCarta();
+                int valorAtributo = 0;
+
+                switch (atributo)
+                {
+                    case 1:
+                        valorAtributo = carta.GetAtributo1();
+                        break;
+                    case 2:
+                        valorAtributo = carta.GetAtributo2();
+                        break;
+                    case 3:
+                        valorAtributo = carta.GetAtributo3();
+                        break;
+                    case 4:
+                        valorAtributo = carta.GetAtributo4();
+                        break;
+                    default:
+                        throw new ArgumentException("Atributo inválido! Escolha um número entre 1 e 4.");
+
+                }
+
+                if (valorAtributo > maiorValorAtributo)
+                {
+                    maiorValorAtributo = valorAtributo;
+                    vencedor = jogador;
+                }
+
+
+                Console.WriteLine($"{jogador.GetNome()} jogou {carta.GetNome()} com valor {valorAtributo}.");
+                cartasJogadas.Add(jogador.RetirarCarta());
 
             }
 
+            if (vencedor == null)
+            {
+                throw new InvalidOperationException("Não foi possível determinar um vencedor.");
+            }
+
+            Console.WriteLine("Vencedor da rodada: " + vencedor.GetNome()); 
             return vencedor;
         }
 
@@ -139,6 +185,17 @@ namespace super_trunfo.core
             }
         }
 
+        public void RemoverJogadorSemCartas()
+        {
+            foreach (var jogador in jogadores)
+            {
+                if (jogador.quantidadeDeCartas() == 0)
+                {
+                    jogadores.Dequeue();
+                    Console.WriteLine($"O jogador {jogador.GetNome()} foi removido por não ter mais cartas.");
+                }
+            }
+        }
         public Jogador? VerificaFimDeJogo()
         {
            if(jogadores.Count == 1)
