@@ -35,18 +35,20 @@ while (jogoAtivo)
 
     while(superTrunfo.VerificaFimDeJogo() == null)
     {
+        int atributoEscolhido;
+
         if(superTrunfo.JogadorDaRodada().GetRobo())
         {
-            superTrunfo.JogarCartaRobo(superTrunfo.JogadorDaRodada());
+            atributoEscolhido = superTrunfo.JogarCartaRobo(superTrunfo.JogadorDaRodada());
         } else
         {
-            superTrunfo.JogarCartaJogador(superTrunfo.JogadorDaRodada());
+            atributoEscolhido = superTrunfo.JogarCartaJogador(superTrunfo.JogadorDaRodada());
         }
 
-        // fazer a parte de vê quem é o vencedor da rodada
-        // fazer remover jogador com carta menor que zero
-
-
+        Jogador ganhadorDaRodada = superTrunfo.Rodada(atributoEscolhido);
+        superTrunfo.GanhadorReceberCartas(ganhadorDaRodada);
+        superTrunfo.RemoverJogadorSemCartas();
+        superTrunfo.ProximoJogador();
         LimpezaTerminal();
         break;
     }
