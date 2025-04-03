@@ -11,19 +11,19 @@ namespace super_trunfo.Entities
     {
         private string nome;
         private string categoria;
-        private int atributo1;
-        private int atributo2;
-        private int atributo3;
-        private int atributo4;
+        private int inteligencia;
+        private int popularidade;
+        private int forca;
+        private int sorte;
 
-        public Carta(string categoria, string nome, int atributo1, int atributo2, int atributo3, int atributo4)
+        public Carta(string categoria, string nome, int inteligencia, int popularidade, int forca, int sorte)
         {
             this.nome = nome;
             this.categoria = categoria;
-            this.atributo1 = atributo1;
-            this.atributo2 = atributo2;
-            this.atributo3 = atributo3;
-            this.atributo4 = atributo4;
+            this.inteligencia = inteligencia;
+            this.popularidade = popularidade;
+            this.forca = forca;
+            this.sorte = sorte;
         }
 
         public string GetNome()
@@ -45,54 +45,54 @@ namespace super_trunfo.Entities
             this.categoria = categoria;
         }
 
-        public int GetAtributo1()
+        public int GetInteligencia()
         {
-            return atributo1;
+            return inteligencia;
         }
 
-        public void SetAtributo1(int atributo1)
+        public void SetAtributo1(int inteligencia)
         {
-            this.atributo1 = atributo1;
+            this.inteligencia = inteligencia;
         }
 
-        public int GetAtributo2()
+        public int GetPopularidade()
         {
-            return atributo2;
+            return popularidade;
         }
 
-        public void SetAtributo2(int atributo2)
+        public void SetPopularidade(int popularidade)
         {
-            this.atributo2 = atributo2;
+            this.popularidade = popularidade;
         }
 
-        public int GetAtributo3()
+        public int GetForca()
         {
-            return atributo3;
+            return forca;
         }
 
-        public void SetAtributo3(int atributo3)
+        public void SetForca(int forca)
         {
-            this.atributo3 = atributo3;
+            this.forca = forca;
         }
 
-        public int GetAtributo4()
+        public int GetSorte()
         {
-            return atributo4;
+            return sorte;
         }
 
-        public void SetAtributo4(int atributo4)
+        public void SetSorte(int sorte)
         {
-            this.atributo4 = atributo4;
+            this.sorte = sorte;
         }
 
         public void PrintCarta()
         {
             Console.WriteLine($"Categoria: {categoria}");
             Console.WriteLine($"Nome: {nome}");
-            Console.WriteLine($"1 - Atributo 1: {atributo1}");
-            Console.WriteLine($"2 - Atributo 2: {atributo2}");
-            Console.WriteLine($"3 - Atributo 3: {atributo3}");
-            Console.WriteLine($"4 - Atributo 4: {atributo4}");
+            Console.WriteLine($"1 - Inteligência: {inteligencia}");
+            Console.WriteLine($"2 - Popularidade: {popularidade}");
+            Console.WriteLine($"3 - Força: {forca}");
+            Console.WriteLine($"4 - Sorte: {sorte}%");
         }
 
     }
