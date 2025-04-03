@@ -129,6 +129,9 @@ namespace super_trunfo.core
 
             Jogador vencedor = null;
             int maiorValorAtributo = int.MinValue;
+            bool temD1 = false;
+            Jogador jogadorD1 = null;
+            bool temCategoriaA = false;
 
             Console.WriteLine("Cartas jogadas:");
 
@@ -140,20 +143,33 @@ namespace super_trunfo.core
                 switch (atributo)
                 {
                     case 1:
-                        valorAtributo = carta.GetAtributo1();
+                        valorAtributo = carta.GetInteligencia();
                         break;
                     case 2:
-                        valorAtributo = carta.GetAtributo2();
+                        valorAtributo = carta.GetPopularidade();
                         break;
                     case 3:
-                        valorAtributo = carta.GetAtributo3();
+                        valorAtributo = carta.GetForca();
                         break;
                     case 4:
-                        valorAtributo = carta.GetAtributo4();
+                        valorAtributo = carta.GetSorte();
                         break;
                     default:
                         throw new ArgumentException("Atributo inválido! Escolha um número entre 1 e 4.");
 
+                }
+
+                Console.WriteLine($"{jogador.GetNome()} jogou {carta.GetNome()} com valor {valorAtributo}.");
+
+                if (carta.GetNome() == "D1")
+                {
+                    temD1 = true;
+                    jogadorD1 = jogador;
+                }
+
+                if (carta.GetCategoria().StartsWith("A"))
+                {
+                    temCategoriaA = true;
                 }
 
                 if (valorAtributo > maiorValorAtributo)
@@ -163,7 +179,12 @@ namespace super_trunfo.core
                 }
 
 
-                Console.WriteLine($"{jogador.GetNome()} jogou {carta.GetNome()} com valor {valorAtributo}.");
+                if (temD1 && !temCategoriaA)
+                {
+                    vencedor = jogadorD1;
+                }
+
+
                 cartasJogadas.Add(jogador.RetirarCarta());
 
             }
