@@ -129,6 +129,8 @@ namespace super_trunfo.core
                 throw new InvalidOperationException("Não há jogadores suficientes para a rodada.");
             }
 
+            QuantidadeDeCartas();
+
             Console.WriteLine("\n📢 Rodada iniciada! Atributo escolhido: " + (atributo == 1 ? "🧠 Inteligência" : atributo == 2 ? "🌟 Popularidade" : atributo == 3 ? "💪 Força" : "🎲 Sorte"));
 
             Jogador vencedor = null;
@@ -200,7 +202,8 @@ namespace super_trunfo.core
                 throw new InvalidOperationException("Não foi possível determinar um vencedor.");
             }
 
-            Console.WriteLine("Vencedor da rodada: " + vencedor.GetNome()); 
+            Console.WriteLine("Vencedor da rodada: " + vencedor.GetNome());
+            
             return vencedor;
         }
 
@@ -211,7 +214,19 @@ namespace super_trunfo.core
                 jogador.SetCarta(carta);
             }
 
+            QuantidadeDeCartas();
+
             cartasJogadas.Clear();
+        }
+
+        public void QuantidadeDeCartas()
+        {
+            Console.WriteLine("\n📜 Estado atual dos jogadores:");
+            foreach (var jogador in jogadores)
+            {
+                Console.WriteLine($"   - {jogador.GetNome()} tem {jogador.quantidadeDeCartas()} cartas.");
+            }
+            Console.WriteLine("--------------------------------------");
         }
 
         public void RemoverJogadorSemCartas()
