@@ -116,6 +116,8 @@ namespace super_trunfo.core
             {
                 Jogador jogadorAtual = jogadores.Dequeue();
                 jogadores.Enqueue(jogadorAtual);
+
+                Console.WriteLine($"\n🔄 Próximo jogador: {jogadores.Peek().GetNome()} ({jogadores.Peek().quantidadeDeCartas()} cartas restantes)");
             }
 
         }
@@ -127,13 +129,16 @@ namespace super_trunfo.core
                 throw new InvalidOperationException("Não há jogadores suficientes para a rodada.");
             }
 
+            Console.WriteLine("\n📢 Rodada iniciada! Atributo escolhido: " + (atributo == 1 ? "🧠 Inteligência" : atributo == 2 ? "🌟 Popularidade" : atributo == 3 ? "💪 Força" : "🎲 Sorte"));
+
             Jogador vencedor = null;
             int maiorValorAtributo = int.MinValue;
             bool temD1 = false;
             Jogador jogadorD1 = null;
             bool temCategoriaA = false;
 
-            Console.WriteLine("Cartas jogadas:");
+            Console.WriteLine("\n🃏 Cartas jogadas:");
+
 
             foreach (var jogador in jogadores)
             {
@@ -159,7 +164,8 @@ namespace super_trunfo.core
 
                 }
 
-                Console.WriteLine($"{jogador.GetNome()} jogou {carta.GetNome()} com valor {valorAtributo}.");
+                Console.WriteLine($"   - {jogador.GetNome()} jogou {carta.GetNome()} ({carta.GetCategoria()}) com {valorAtributo} pontos.");
+                
 
                 if (carta.GetCategoria() == "D1")
                 {
@@ -181,6 +187,8 @@ namespace super_trunfo.core
                 cartasJogadas.Add(jogador.RetirarCarta());
 
             }
+
+            Console.WriteLine("--------------------------------------");
 
             if (temD1 && !temCategoriaA)
             {
@@ -230,11 +238,19 @@ namespace super_trunfo.core
         public Jogador? VerificaFimDeJogo()
         {
             if (jogadores.Count == 1)
-           {
-                return jogadores.Peek();
-           }
+            {
+                Console.WriteLine("\n🏆 FIM DE JOGO! Placar Final:");
+                var ranking = jogadores.OrderByDescending(j => j.quantidadeDeCartas()).ToList();
+                for (int i = 0; i < ranking.Count; i++)
+                {
+                    Console.WriteLine($"   {i + 1}º - {ranking[i].GetNome()} com {ranking[i].quantidadeDeCartas()} cartas.");
+                }
+                Console.WriteLine("--------------------------------------");
 
-           return null;
+                return jogadores.Peek();
+            }
+
+            return null;
 
         }
     }
