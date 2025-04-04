@@ -161,7 +161,7 @@ namespace super_trunfo.core
 
                 Console.WriteLine($"{jogador.GetNome()} jogou {carta.GetNome()} com valor {valorAtributo}.");
 
-                if (carta.GetNome() == "D1")
+                if (carta.GetCategoria() == "D1")
                 {
                     temD1 = true;
                     jogadorD1 = jogador;
