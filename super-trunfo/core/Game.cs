@@ -178,15 +178,13 @@ namespace super_trunfo.core
                     vencedor = jogador;
                 }
 
-
-                if (temD1 && !temCategoriaA)
-                {
-                    vencedor = jogadorD1;
-                }
-
-
                 cartasJogadas.Add(jogador.RetirarCarta());
 
+            }
+
+            if (temD1 && !temCategoriaA)
+            {
+                vencedor = jogadorD1;
             }
 
             if (vencedor == null)
@@ -204,6 +202,8 @@ namespace super_trunfo.core
             {
                 jogador.SetCarta(carta);
             }
+
+            cartasJogadas.Clear();
         }
 
         public void RemoverJogadorSemCartas()
