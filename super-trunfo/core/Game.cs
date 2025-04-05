@@ -133,24 +133,31 @@ namespace super_trunfo.core
 
             Console.WriteLine("\n📢 Rodada iniciada! Atributo escolhido: " + (atributo == 1 ? "🧠 Inteligência" : atributo == 2 ? "🌟 Popularidade" : atributo == 3 ? "💪 Força" : "🎲 Sorte"));
 
-            List<Jogador> vencedore = new List<Jogador>();
+            List<Jogador> vencedores = new List<Jogador>();
             int maiorValorAtributo = int.MinValue;
             bool temD1 = false;
             Jogador jogadorD1 = null;
             bool temCategoriaA = false;
+            List<Jogador> jogadoresCategoriaA = new List<Jogador>(); // Track "A" category players
 
             Console.WriteLine("\n🃏 Cartas jogadas:");
-
 
             foreach (var jogador in jogadores)
             {
                 Carta carta = jogador.GetCarta();
-                int valorAtributo = 0;
-
-               
-
+                int valorAtributo = Carta.GetAtributoValor(carta, atributo); // Assuming this helper method exists
                 Console.WriteLine($"   - {jogador.GetNome()} jogou {carta.GetNome()} ({carta.GetCategoria()}) com {valorAtributo} pontos.");
-                
+
+                if (valorAtributo > maiorValorAtributo)
+                {
+                    maiorValorAtributo = valorAtributo;
+                    vencedores.Clear();
+                    vencedores.Add(jogador);
+                }
+                else if (valorAtributo == maiorValorAtributo)
+                {
+                    vencedores.Add(jogador);
+                }
 
                 if (carta.GetCategoria() == "D1")
                 {
@@ -161,23 +168,63 @@ namespace super_trunfo.core
                 if (carta.GetCategoria().StartsWith("A"))
                 {
                     temCategoriaA = true;
-                }
-
-                if (valorAtributo > maiorValorAtributo)
-                {
-                    maiorValorAtributo = valorAtributo;
-                    vencedor = jogador;
+                    jogadoresCategoriaA.Add(jogador);
                 }
 
                 cartasJogadas.Add(jogador.RetirarCarta());
-
             }
 
             Console.WriteLine("--------------------------------------");
 
-            if (temD1 && !temCategoriaA)
+            Jogador vencedor;
+
+            if (temD1)
             {
-                vencedor = jogadorD1;
+                if (!temCategoriaA)
+                {
+                    // No "A" cards, D1 wins automatically
+                    vencedor = jogadorD1;
+                }
+                else
+                {
+                    // "A" cards are present, check if any "A" card beats D1
+                    int valorD1 = Carta.GetAtributoValor(jogadorD1.GetCarta(), atributo);
+                    bool d1Perdeu = false;
+                    Jogador vencedorA = null;
+
+                    foreach (var jogadorA in jogadoresCategoriaA)
+                    {
+                        int valorA = Carta.GetAtributoValor(jogadorA.GetCarta(), atributo);
+                        if (valorA > valorD1)
+                        {
+                            d1Perdeu = true;
+                            vencedorA = jogadorA;
+                            break; // Only one "A" card needs to beat D1
+                        }
+                    }
+
+                    if (d1Perdeu)
+                    {
+                        vencedor = vencedorA; // An "A" card beats D1
+                    }
+                    else
+                    {
+                        vencedor = jogadorD1; // D1 wins if no "A" card beats it
+                    }
+                }
+            }
+            else
+            {
+                // No D1 in play, proceed with normal attribute comparison
+                if (vencedores.Count > 1)
+                {
+                    Console.WriteLine("Empate! As cartas permanecem na mesa para a próxima rodada.");
+                    return null;
+                }
+                else
+                {
+                    vencedor = vencedores[0];
+                }
             }
 
             if (vencedor == null)
@@ -186,7 +233,6 @@ namespace super_trunfo.core
             }
 
             Console.WriteLine("Vencedor da rodada: " + vencedor.GetNome());
-            
             return vencedor;
         }
 

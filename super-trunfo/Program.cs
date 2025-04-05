@@ -30,6 +30,7 @@ while (jogoAtivo)
     }
 
     superTrunfo.SorteaOrdemInicial();
+    LimpezaTerminal();
 
     superTrunfo.DistribuirCartas();
 
