@@ -133,7 +133,7 @@ namespace super_trunfo.core
 
             Console.WriteLine("\n📢 Rodada iniciada! Atributo escolhido: " + (atributo == 1 ? "🧠 Inteligência" : atributo == 2 ? "🌟 Popularidade" : atributo == 3 ? "💪 Força" : "🎲 Sorte"));
 
-            Jogador vencedor = null;
+            List<Jogador> vencedore = new List<Jogador>();
             int maiorValorAtributo = int.MinValue;
             bool temD1 = false;
             Jogador jogadorD1 = null;
@@ -147,24 +147,7 @@ namespace super_trunfo.core
                 Carta carta = jogador.GetCarta();
                 int valorAtributo = 0;
 
-                switch (atributo)
-                {
-                    case 1:
-                        valorAtributo = carta.GetInteligencia();
-                        break;
-                    case 2:
-                        valorAtributo = carta.GetPopularidade();
-                        break;
-                    case 3:
-                        valorAtributo = carta.GetForca();
-                        break;
-                    case 4:
-                        valorAtributo = carta.GetSorte();
-                        break;
-                    default:
-                        throw new ArgumentException("Atributo inválido! Escolha um número entre 1 e 4.");
-
-                }
+               
 
                 Console.WriteLine($"   - {jogador.GetNome()} jogou {carta.GetNome()} ({carta.GetCategoria()}) com {valorAtributo} pontos.");
                 

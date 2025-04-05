@@ -85,6 +85,24 @@ namespace super_trunfo.Entities
             this.sorte = sorte;
         }
 
+        public static int GetAtributoValor(Carta carta, int atributo)
+        {
+            switch (atributo)
+            {
+                case 1:
+                    return carta.GetInteligencia();
+                case 2:
+                    return carta.GetPopularidade();
+                case 3:
+                    return carta.GetForca();
+                case 4:
+                    return carta.GetSorte();
+                default:
+                    throw new ArgumentException("Atributo inválido! Escolha um número entre 1 e 4.");
+
+            }
+        }
+
         public void PrintCarta()
         {
             Console.WriteLine($"Categoria: {categoria}");
