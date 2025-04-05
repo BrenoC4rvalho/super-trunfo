@@ -47,7 +47,10 @@ while (jogoAtivo)
         }
 
         Jogador ganhadorDaRodada = superTrunfo.Rodada(atributoEscolhido);
-        superTrunfo.GanhadorReceberCartas(ganhadorDaRodada);
+        if(ganhadorDaRodada != null)
+        {
+            superTrunfo.GanhadorReceberCartas(ganhadorDaRodada);
+        }
         superTrunfo.RemoverJogadorSemCartas();
         superTrunfo.ProximoJogador();
         LimpezaTerminal();
@@ -58,7 +61,7 @@ while (jogoAtivo)
     Console.WriteLine("Deseja jogar novamente? (s/n)");
     string? resposta = Console.ReadLine()?.Trim().ToLower();
     jogoAtivo = (resposta == "s");
-
+    LimpezaTerminal();
 }
 
 void LimpezaTerminal()
