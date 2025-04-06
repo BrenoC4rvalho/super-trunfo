@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 
 namespace super_trunfo.Entities
 {
+       
     class Jogador
     {
+
         private string nome;
         private bool robo;
         private Queue<Carta> cartas = new Queue<Carta>();
@@ -47,17 +49,18 @@ namespace super_trunfo.Entities
         public void SetCarta(Carta carta)
         {
             cartas.Enqueue(carta);
-        } 
-        
+        }
+
         public Carta RetirarCarta()
         {
             return cartas.Dequeue();
         }
 
-        public int quantidadeDeCartas()
+        public int QuantidadeDeCartas()
         {
             return cartas.Count();
         }
+
 
     }
 

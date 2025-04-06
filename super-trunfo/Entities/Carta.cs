@@ -1,4 +1,5 @@
-﻿using System;
+﻿using super_trunfo.utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,35 +10,59 @@ namespace super_trunfo.Entities
 
     class Carta
     {
-        private string nome;
-        private string categoria;
+
+        private string categoria; 
+        private string nome; 
         private int inteligencia;
         private int popularidade;
         private int forca;
         private int sorte;
+        private bool superTrunfo;
 
-        public Carta(string categoria, string nome, int inteligencia, int popularidade, int forca, int sorte)
+        public Carta(string categoria, string nome, int inteligencia, int popularidade, int forca, int sorte, bool superTrunfo)
         {
-            this.nome = nome;
             this.categoria = categoria;
+            this.nome = nome;
             this.inteligencia = inteligencia;
             this.popularidade = popularidade;
             this.forca = forca;
             this.sorte = sorte;
-        }
-
-        public string GetNome()
-        {
-            return nome;
-        }
-        public void SetNome(string nome)
-        {
-            this.nome = nome;
+            this.superTrunfo = superTrunfo;
         }
 
         public string GetCategoria()
         {
-            return categoria;
+            return this.categoria;
+        }
+
+        public string GetNome()
+        {
+            return this.nome;
+        }
+
+        public int GetInteligencia()
+        {
+            return this.inteligencia;
+        }
+
+        public int GetPopularidade()
+        {
+            return this.popularidade;
+        }
+
+        public int GetForca()
+        {
+            return this.forca;
+        }
+
+        public int GetSorte()
+        {
+            return this.sorte;
+        }
+
+        public bool GetSuperTrunfo()
+        {
+            return this.superTrunfo;
         }
 
         public void SetCategoria(string categoria)
@@ -45,19 +70,14 @@ namespace super_trunfo.Entities
             this.categoria = categoria;
         }
 
-        public int GetInteligencia()
+        public void SetNome(string nome)
         {
-            return inteligencia;
+            this.nome = nome;
         }
 
-        public void SetAtributo1(int inteligencia)
+        public void SetInteligencia(int inteligencia)
         {
             this.inteligencia = inteligencia;
-        }
-
-        public int GetPopularidade()
-        {
-            return popularidade;
         }
 
         public void SetPopularidade(int popularidade)
@@ -65,19 +85,9 @@ namespace super_trunfo.Entities
             this.popularidade = popularidade;
         }
 
-        public int GetForca()
-        {
-            return forca;
-        }
-
         public void SetForca(int forca)
         {
             this.forca = forca;
-        }
-
-        public int GetSorte()
-        {
-            return sorte;
         }
 
         public void SetSorte(int sorte)
@@ -85,7 +95,12 @@ namespace super_trunfo.Entities
             this.sorte = sorte;
         }
 
-        public static int GetAtributoValor(Carta carta, int atributo)
+        public void SetSuperTrunfo(bool superTrunfo)
+        {
+            this.superTrunfo = superTrunfo;
+        }
+
+        public static int PegarValorDoAtributo(Carta carta, int atributo)
         {
             switch (atributo)
             {
@@ -99,19 +114,38 @@ namespace super_trunfo.Entities
                     return carta.GetSorte();
                 default:
                     throw new ArgumentException("Atributo inválido! Escolha um número entre 1 e 4.");
-
             }
         }
 
-        public void PrintCarta()
+        public void ImprimirCarta()
         {
-            Console.WriteLine($"Categoria: {categoria}");
-            Console.WriteLine($"Nome: {nome}");
-            Console.WriteLine($"1 - Inteligência: {inteligencia}");
-            Console.WriteLine($"2 - Popularidade: {popularidade}");
-            Console.WriteLine($"3 - Força: {forca}");
-            Console.WriteLine($"4 - Sorte: {sorte}%");
+
+            Terminal.EscreverColorido("Categoria: ", ConsoleColor.Blue);
+            Terminal.Escrever(this.categoria);
+            Terminal.PularLinha();
+            
+            Terminal.EscreverColorido("Nome: ", ConsoleColor.Blue);
+            Terminal.Escrever(this.nome);
+            Terminal.PularLinha();         
+
+            Terminal.EscreverColorido("1 - Inteligência: ", ConsoleColor.Blue);
+            Terminal.Escrever(Convert.ToString(this.inteligencia));
+            Terminal.PularLinha();
+
+            Terminal.EscreverColorido("2 - Popularidade: ", ConsoleColor.Blue);
+            Terminal.Escrever(Convert.ToString(this.popularidade));
+            Terminal.PularLinha();
+
+            Terminal.EscreverColorido("3 - Força: ", ConsoleColor.Blue);
+            Terminal.Escrever(Convert.ToString(this.popularidade));
+            Terminal.PularLinha();
+
+            Terminal.EscreverColorido("4 - Sorte: ", ConsoleColor.Blue);
+            Terminal.Escrever(Convert.ToString(this.popularidade));
+            Terminal.PularLinha();
+
         }
+
 
     }
 }

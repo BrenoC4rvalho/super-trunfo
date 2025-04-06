@@ -1,4 +1,5 @@
 ﻿using super_trunfo.Entities;
+using super_trunfo.utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace super_trunfo.core
 {
     class Game
     {
+
         private Queue<Jogador> jogadores = new Queue<Jogador>();
         private Baralho baralho = new Baralho();
         private List<Carta> cartasJogadas = new List<Carta>();
@@ -20,22 +22,14 @@ namespace super_trunfo.core
             baralho.JogoDoBicho();
         }
 
-        public void SetJogador(Jogador jogador)
-        {
-            if(jogadores.Count < 6)
-            {
-                this.jogadores.Enqueue(jogador);
-            }
-        }
-
         public void DistribuirCartas()
         {
-            while(baralho.QuantidadeDeCartas() > 0)
+            while (baralho.QuantidadeDeCartas() > 0)
             {
 
                 foreach (var jogador in jogadores)
                 {
-                    if(baralho.QuantidadeDeCartas() == 0)
+                    if (baralho.QuantidadeDeCartas() == 0)
                     {
                         break;
                     }
@@ -46,107 +40,189 @@ namespace super_trunfo.core
             }
         }
 
+        public void AdicionarJogador(Jogador jogador)
+        {
+            if (jogadores.Count < 6)
+            {
+                this.jogadores.Enqueue(jogador);
+            }
+        }
+
+        public Jogador CriarJogador()
+        {
+            try
+            {
+                Terminal.EscreverLinhaColorida("Qual seu nome?", ConsoleColor.Blue);
+                Terminal.Escrever("Nome: ");
+                string nome = Terminal.LeituraString();
+                Jogador jogador = new Jogador(nome, false);
+                Terminal.PausarELimpar();
+                return jogador;
+            } catch(ArgumentException e)
+            {
+                Terminal.EscreverLinhaColorida("O nome do jogador não pode ser vazio.", ConsoleColor.Red);
+                return this.CriarJogador();
+            }
+
+        }
+
+        public void CriarOponentes()
+        {
+            Terminal.EscreverLinhaColorida("Quantos jogadores você deseja adicionar? 1, 2, 3, 4 ou 5 jogadores?", ConsoleColor.Blue);
+            Terminal.Escrever("Número de jogadores: ");
+
+            try
+            {
+                int numeroDeOponentes = Terminal.LeituraInt();
+                if (numeroDeOponentes < 1 || numeroDeOponentes > 5)
+                {
+                    throw new ArgumentException("Número inválido! Escolha um número entre 1 e 5.");
+                }
+
+                for (int i = 0; i < numeroDeOponentes; i++)
+                {
+                    AdicionarJogador(new Jogador($"Bicho Doido {i + 1}", true));
+                }
+
+                Terminal.PausarELimpar();
+
+            } catch(ArgumentException e)
+            {
+                Terminal.EscreverLinhaColorida("Número inválido! Escolha um número entre 1 e 5.", ConsoleColor.Red);
+                Terminal.PausarELimpar();
+                CriarOponentes();
+            }
+            
+        }
+
         public Jogador JogadorDaRodada()
         {
             return jogadores.Peek();
         }
 
-        public int JogarCartaJogador(Jogador jogador)
-        {
-            if(jogador.GetRobo())
-            {
-                throw new Exception("O jogador é um robô e não pode jogar cartas no lugar de um jogador.");
-            }
-
-            while(true)
-            {
-
-                Console.WriteLine($"É a vez de {jogador.GetNome()} jogar.");
-                Console.WriteLine("Selecione um atributo:");
-                jogador.GetCarta().PrintCarta();
-                if(int.TryParse(Console.ReadLine(), out int atributoEscolhido) && atributoEscolhido >= 1 && atributoEscolhido <= 4)
-                {
-                    return atributoEscolhido;
-                }
-
-                Console.WriteLine("Entrada inválida! Digite um número entre 1 e 4.");
-
-            }
-            
-
-        }
-
-        public int JogarCartaRobo(Jogador jogador)
+        public int EscolhaAtributoRobo(Jogador jogador)
         {
             if (!jogador.GetRobo())
             {
-                throw new Exception("O jogador não é um robô e não pode jogar cartas no lugar de um robô.");
+                Terminal.EscreverLinhaColorida("O jogador não é um robô, e não pode escolher o atributo no lugar de um robô.", ConsoleColor.Red);
             }
 
-            Console.WriteLine($"É a vez de {jogador.GetNome()} jogar.");
-            jogador.GetCarta().PrintCarta();
+            Terminal.PularLinha();
+            Terminal.EscreverLinhaColorida($"É a vez de {jogador.GetNome()} jogar.", ConsoleColor.Blue);
+            Terminal.PularLinha();
+            jogador.GetCarta().ImprimirCarta();
+            Terminal.PularLinha();
+
+            Terminal.EscreverColorido("Escolheu o atributo: ", ConsoleColor.Blue);
             int atributoEscolhido = random.Next(1, 5);
+            Terminal.Escrever(atributoEscolhido.ToString());
             return atributoEscolhido;
+
+        }
+
+        public int EscolhaAtributoJogador(Jogador jogador)
+        {
+            if(jogador.GetRobo())
+            {
+                Terminal.EscreverLinhaColorida("O jogador é um robô e não pode escolher o atributo!", ConsoleColor.Red);
+            }
+
+            Terminal.PularLinha();
+            Terminal.EscreverLinhaColorida($"É a vez de {jogador.GetNome()} jogar.", ConsoleColor.Blue);
+            Terminal.PularLinha();
+            Terminal.EscreverLinhaColorida("Escolha um atributo: ", ConsoleColor.Blue);
+            Terminal.PularLinha();  
+            jogador.GetCarta().ImprimirCarta();
+
+            Terminal.PularLinha();
+            Terminal.EscreverLinhaColorida("Escolha um atributo: ", ConsoleColor.Blue);
+
+            try
+            {
+                int atributoEscolhido = Terminal.LeituraInt();
+
+                if (atributoEscolhido < 1 || atributoEscolhido > 5)
+                {
+                    Terminal.EscreverLinhaColorida("Número inválido! Escolha um número entre 1 e 5.", ConsoleColor.Red);
+                    Terminal.PausarELimpar();
+                    return EscolhaAtributoJogador(jogador);
+                }
+                
+                return atributoEscolhido;
+            }
+            catch (ArgumentException)
+            {
+                Terminal.PausarELimpar();
+                Terminal.EscreverLinhaColorida("É preciso ser um número válido!", ConsoleColor.Red);
+                return EscolhaAtributoJogador(jogador);
+            }
+
+
 
         }
 
         public void SorteaOrdemInicial()
         {
-            if(jogadores.Count <= 1)
+            if (jogadores.Count <= 1)
             {
-                Console.WriteLine("É necessário ter mais de um jogador para sortear a ordem inicial");
+                Terminal.EscreverLinhaColorida("É necessário ter mais de um jogador para sortear a ordem inicial", ConsoleColor.Red);
+                Terminal.PularLinha();
             }
 
-            // Converte a fila para uma lista e embaralha
             var jogadoresEmbaralhados = jogadores.OrderBy(j => random.Next()).ToList();
 
-            // Cria uma nova fila com a ordem embaralhada
             jogadores = new Queue<Jogador>(jogadoresEmbaralhados);
 
-            Console.WriteLine("Ordem inicial sorteada:");
+            Terminal.EscreverLinhaColorida("Ordem inicial sorteada: ", ConsoleColor.Blue);
+            Terminal.PularLinha();
+
             foreach (var jogador in jogadores)
             {
-                Console.WriteLine(jogador.GetNome());
+                Terminal.EscreverLinha(jogador.GetNome());
             }
+
         }
 
         public void ProximoJogador()
         {
-            if(jogadores.Count > 1)
+            if (jogadores.Count > 1)
             {
                 Jogador jogadorAtual = jogadores.Dequeue();
                 jogadores.Enqueue(jogadorAtual);
 
-                Console.WriteLine($"\n🔄 Próximo jogador: {jogadores.Peek().GetNome()} ({jogadores.Peek().quantidadeDeCartas()} cartas restantes)");
+                Terminal.EscreverColorido("Próximo jogador: ", ConsoleColor.Green);
+                Terminal.Escrever(jogadores.Peek().GetNome());
+                Terminal.PularLinha();
             }
 
         }
 
-        public Jogador Rodada(int atributo)
+        public Jogador? Rodada(int atributo)
         {
             if (jogadores.Count == 0)
             {
-                throw new InvalidOperationException("Não há jogadores suficientes para a rodada.");
+                Terminal.EscreverLinhaColorida("Não há jogadores suficiente para a rodada.", ConsoleColor.Red);
+                return null;
             }
 
-            QuantidadeDeCartas();
-
-            Console.WriteLine("\n📢 Rodada iniciada! Atributo escolhido: " + (atributo == 1 ? "🧠 Inteligência" : atributo == 2 ? "🌟 Popularidade" : atributo == 3 ? "💪 Força" : "🎲 Sorte"));
+            Terminal.EscreverLinhaColorida("Atributo escolhido na rodada:", ConsoleColor.Blue);
+            Terminal.EscreverLinha(atributo == 1 ? "Inteligência" : atributo == 2 ? "Popularidade" : atributo == 3 ? "Força" : "Sorte");
+            Terminal.PularLinha();
 
             List<Jogador> vencedores = new List<Jogador>();
             int maiorValorAtributo = int.MinValue;
-            bool temD1 = false;
-            Jogador jogadorD1 = null;
-            bool temCategoriaA = false;
-            List<Jogador> jogadoresCategoriaA = new List<Jogador>(); // Track "A" category players
+            Jogador jogadorComSuperTrunfo = null;
+            Carta cartaSuperTrunfo = null;
+            List<(Jogador, Carta)> jogadoresComCategoriaA = new List<(Jogador, Carta)>();
 
-            Console.WriteLine("\n🃏 Cartas jogadas:");
+            Terminal.EscreverLinhaColorida("Cartas jogadas na rodada:", ConsoleColor.Blue);
+            Terminal.PularLinha();
 
             foreach (var jogador in jogadores)
             {
                 Carta carta = jogador.GetCarta();
-                int valorAtributo = Carta.GetAtributoValor(carta, atributo); // Assuming this helper method exists
-                Console.WriteLine($"   - {jogador.GetNome()} jogou {carta.GetNome()} ({carta.GetCategoria()}) com {valorAtributo} pontos.");
+                int valorAtributo = Carta.PegarValorDoAtributo(carta, atributo);
+                Terminal.EscreverLinha($"O {jogador.GetNome()} jogou {carta.GetNome()} - {carta.GetCategoria()} - {valorAtributo}");
 
                 if (valorAtributo > maiorValorAtributo)
                 {
@@ -159,143 +235,165 @@ namespace super_trunfo.core
                     vencedores.Add(jogador);
                 }
 
-                if (carta.GetCategoria() == "D1")
+                if (carta.GetSuperTrunfo())
                 {
-                    temD1 = true;
-                    jogadorD1 = jogador;
+                    jogadorComSuperTrunfo = jogador;
+                    cartaSuperTrunfo = carta;
                 }
 
                 if (carta.GetCategoria().StartsWith("A"))
                 {
-                    temCategoriaA = true;
-                    jogadoresCategoriaA.Add(jogador);
+                    jogadoresComCategoriaA.Add((jogador, carta));
                 }
 
                 cartasJogadas.Add(jogador.RetirarCarta());
             }
 
-            Console.WriteLine("--------------------------------------");
-
+            Terminal.PularLinha();
             Jogador vencedor;
 
-            if (temD1)
+            if (jogadorComSuperTrunfo != null)
             {
-                if (!temCategoriaA)
+                if (jogadoresComCategoriaA.Count() == 0)
                 {
-                    // No "A" cards, D1 wins automatically
-                    vencedor = jogadorD1;
+                    Terminal.EscreverLinhaColorida($"O jogador {jogadorComSuperTrunfo.GetNome()} venceu a rodada com o super trunfo!", ConsoleColor.Green);
+                    Terminal.PularLinha();
+                    vencedor = jogadorComSuperTrunfo;
                 }
                 else
                 {
-                    // "A" cards are present, check if any "A" card beats D1
-                    int valorD1 = Carta.GetAtributoValor(jogadorD1.GetCarta(), atributo);
-                    bool d1Perdeu = false;
-                    Jogador vencedorA = null;
+                    int valorD1 = Carta.PegarValorDoAtributo(cartaSuperTrunfo, atributo);
+                    int maiorA = int.MinValue;
+                    Jogador jogadorCategoriaAMaior = null;
+                    bool empate = false;
 
-                    foreach (var jogadorA in jogadoresCategoriaA)
+                    foreach (var (jogadorA, cartaA) in jogadoresComCategoriaA)
                     {
-                        int valorA = Carta.GetAtributoValor(jogadorA.GetCarta(), atributo);
-                        if (valorA > valorD1)
+                        int valorA = Carta.PegarValorDoAtributo(cartaA, atributo);
+                        if (valorA > maiorA)
                         {
-                            d1Perdeu = true;
-                            vencedorA = jogadorA;
-                            break; // Only one "A" card needs to beat D1
+                            maiorA = valorA;
+                            jogadorCategoriaAMaior = jogadorA;
+                            empate = false;
+                        }
+                        else if (valorA == maiorA)
+                        {
+                            empate = true;
                         }
                     }
 
-                    if (d1Perdeu)
+                    if (maiorA > valorD1 && !empate)
                     {
-                        vencedor = vencedorA; // An "A" card beats D1
+                        Terminal.EscreverLinhaColorida($"O jogador {jogadorCategoriaAMaior.GetNome()} venceu a rodada com a categoria A!", ConsoleColor.Green);
+                        Terminal.PularLinha();
+                        vencedor = jogadorCategoriaAMaior;
+                    }
+                    else if (maiorA == valorD1 || empate)
+                    {
+                        Terminal.EscreverLinhaColorida("Empate entre Super Trunfo e Categoria A! Nenhum jogador venceu a rodada.", ConsoleColor.Yellow);
+                        return null;
                     }
                     else
                     {
-                        vencedor = jogadorD1; // D1 wins if no "A" card beats it
+                        Terminal.EscreverLinhaColorida($"O jogador {jogadorComSuperTrunfo.GetNome()} venceu a rodada com o super trunfo!", ConsoleColor.Green);
+                        vencedor = jogadorComSuperTrunfo;
                     }
                 }
+
+
             }
             else
             {
-                // No D1 in play, proceed with normal attribute comparison
                 if (vencedores.Count > 1)
                 {
-                    Console.WriteLine("Empate! As cartas permanecem na mesa para a próxima rodada.");
+                    Terminal.EscreverLinhaColorida("Empate na rodada! Nenhum jogador venceu.", ConsoleColor.Yellow);
                     return null;
                 }
                 else
                 {
                     vencedor = vencedores[0];
+                    Terminal.EscreverLinhaColorida($"O jogador {vencedor.GetNome()} venceu a rodada!", ConsoleColor.Green);
                 }
             }
 
-            if (vencedor == null)
-            {
-                throw new InvalidOperationException("Não foi possível determinar um vencedor.");
-            }
-
-            Console.WriteLine("Vencedor da rodada: " + vencedor.GetNome());
+            Terminal.PularLinha();
             return vencedor;
-        }
-
-        public void GanhadorReceberCartas(Jogador jogador)
-        {
-            foreach(var carta in cartasJogadas )
-            {
-                jogador.SetCarta(carta);
-            }
-
-            QuantidadeDeCartas();
-
-            cartasJogadas.Clear();
         }
 
         public void QuantidadeDeCartas()
         {
-            Console.WriteLine("\n📜 Estado atual dos jogadores:");
+            Terminal.EscreverLinhaColorida("Estado atual dos jogadores: ", ConsoleColor.Blue);
+            Terminal.PularLinha();
             foreach (var jogador in jogadores)
             {
-                Console.WriteLine($"   - {jogador.GetNome()} tem {jogador.quantidadeDeCartas()} cartas.");
+                Terminal.EscreverLinha($"{jogador.GetNome()} - {jogador.QuantidadeDeCartas()} cartas");
             }
-            Console.WriteLine("--------------------------------------");
+
+            Terminal.PularLinha();
         }
 
-        public void RemoverJogadorSemCartas()
+        public void RemoveJogadorSemCartas()
         {
-            int jogadoresIniciais = jogadores.Count;
+            int jogadoresDaRodada = jogadores.Count();
 
-            Queue<Jogador> novaFila = new Queue<Jogador>();
+            Queue<Jogador> filaAuxiliar = new Queue<Jogador>();
 
-            while (jogadores.Count > 0)
+            while(jogadores.Count > 0)
             {
                 Jogador jogador = jogadores.Dequeue();
-                if (jogador.quantidadeDeCartas() > 0)
+                if (jogador.QuantidadeDeCartas() == 0)
                 {
-                    novaFila.Enqueue(jogador);
+                    Terminal.EscreverLinhaColorida($"O jogador {jogador.GetNome()} foi eliminado!", ConsoleColor.Red);
+                    Terminal.PularLinha();
                 }
                 else
                 {
-                    Console.WriteLine($"O jogador {jogador.GetNome()} foi removido por não ter mais cartas.");
+                    filaAuxiliar.Enqueue(jogador);
                 }
-            }
 
-            jogadores = novaFila;
+            }
+            jogadores = filaAuxiliar;
         }
-        public Jogador? VerificaFimDeJogo()
+
+        public void GanhadorRecebeCartas(Jogador ganhador)
         {
-            if (jogadores.Count == 1)
+            if (ganhador == null)
             {
-                Console.WriteLine("\n🏆 FIM DE JOGO! Placar Final:");
-                var ranking = jogadores.OrderByDescending(j => j.quantidadeDeCartas()).ToList();
-                for (int i = 0; i < ranking.Count; i++)
-                {
-                    Console.WriteLine($"   {i + 1}º - {ranking[i].GetNome()} com {ranking[i].quantidadeDeCartas()} cartas.");
-                }
-                Console.WriteLine("--------------------------------------");
+                Terminal.EscreverLinhaColorida("Não houve ganhador!", ConsoleColor.Red);
+                return;
+            }
+            Terminal.PularLinha();
+            foreach (var carta in cartasJogadas)
+            {
+                ganhador.SetCarta(carta);
+            }
+            cartasJogadas.Clear();
+        }
 
-                return jogadores.Peek();
+        public bool VerificaFimDeJogo()
+        {
+            if(jogadores.Count == 1)
+            {
+                Terminal.EscreverLinhaColorida($"Fim de jogo! O jogador {jogadores.Peek().GetNome()} venceu!", ConsoleColor.Green);
+                Terminal.PularLinha();
+                Terminal.PausarELimpar();
+
+                return true;
+            }
+            else if (jogadores.Count == 0)
+            {
+                Terminal.EscreverLinhaColorida("Fim de jogo! Todos os jogadores foram eliminados!", ConsoleColor.Red);
+                Terminal.PularLinha();
+                Terminal.PausarELimpar();
+
+                return true;
             }
 
-            return null;
+            return false;
+        } 
 
-        }
+       
+
+
     }
 }
