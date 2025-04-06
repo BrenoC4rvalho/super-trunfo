@@ -56,7 +56,7 @@ namespace super_trunfo.Entities
             return cartas.Dequeue();
         }
 
-        public int quantidadeDeCartas()
+        public int QuantidadeDeCartas()
         {
             return cartas.Count();
         }

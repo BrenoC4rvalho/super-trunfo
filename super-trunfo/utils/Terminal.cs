@@ -46,6 +46,28 @@ namespace super_trunfo.utils
             Console.Clear();
         }
 
+        public static string LeituraString()
+        {
+            string text = Console.ReadLine();
+
+            if(string.IsNullOrWhiteSpace(text))
+            {
+                throw new ArgumentException("A string não deve ser vazia.");
+            }
+
+            return text;
+        }
+
+        public static int LeituraInt()
+        {
+            string text = Console.ReadLine();
+            if (!int.TryParse(text, out int numero))
+            {
+                throw new ArgumentException("O valor deve ser um número inteiro.");
+            }
+            return numero;
+        }
+
 
     }
 }
