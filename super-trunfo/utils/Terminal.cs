@@ -12,7 +12,7 @@ namespace super_trunfo.utils
         public static void EscreverColorido(string mensagem, ConsoleColor cor)
         {
             Console.ForegroundColor = cor;
-            Console.WriteLine(mensagem);
+            Console.Write(mensagem);
             Console.ResetColor();
         }
 
@@ -41,6 +41,7 @@ namespace super_trunfo.utils
         public static void PausarELimpar()
         {
             Console.WriteLine();
+            Console.WriteLine("Pressione qualquer tecla para continuar...");
             Console.ReadKey();
             Console.Clear();
         }
