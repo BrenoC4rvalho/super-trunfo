@@ -2,4 +2,6 @@
 
 using super_trunfo.utils;
 
+
+
 Regras.Imprimir();
