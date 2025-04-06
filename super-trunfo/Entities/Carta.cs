@@ -17,9 +17,9 @@ namespace super_trunfo.Entities
         private int popularidade;
         private int forca;
         private int sorte;
-        private Boolean superTrunfo;
+        private bool superTrunfo;
 
-        public Carta(string categoria, string nome, int inteligencia, int popularidade, int forca, int sorte, Boolean superTrunfo)
+        public Carta(string categoria, string nome, int inteligencia, int popularidade, int forca, int sorte, bool superTrunfo)
         {
             this.categoria = categoria;
             this.nome = nome;
@@ -60,7 +60,7 @@ namespace super_trunfo.Entities
             return this.sorte;
         }
 
-        public Boolean GetSuperTrunfo()
+        public bool GetSuperTrunfo()
         {
             return this.superTrunfo;
         }
@@ -95,7 +95,7 @@ namespace super_trunfo.Entities
             this.sorte = sorte;
         }
 
-        public void SetSuperTrunfo(Boolean superTrunfo)
+        public void SetSuperTrunfo(bool superTrunfo)
         {
             this.superTrunfo = superTrunfo;
         }
