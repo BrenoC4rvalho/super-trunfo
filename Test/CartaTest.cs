@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 using super_trunfo.Entities;
 
 
-namespace Test
+namespace super_Trunfo.Test
 {
     [TestClass]
-    class CartaTest
+    public class CartaTest
     {
 
         [TestMethod]

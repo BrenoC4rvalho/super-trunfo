@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace super_trunfo.core
 {
-    class Baralho
+    public class Baralho
     {
 
         private List<Carta> cartas;
