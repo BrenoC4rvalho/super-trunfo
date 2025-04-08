@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace super_trunfo.Entities
 {
 
-    class Carta
+    public class Carta
     {
 
         private string categoria; 
