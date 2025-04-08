@@ -13,10 +13,13 @@ namespace super_trunfo.Entities
 
         private string categoria; 
         private string nome; 
+       
+        // atributos da carta
         private int inteligencia;
         private int popularidade;
         private int forca;
         private int sorte;
+        
         private bool superTrunfo;
 
         public Carta(string categoria, string nome, int inteligencia, int popularidade, int forca, int sorte, bool superTrunfo)

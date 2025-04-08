@@ -65,7 +65,8 @@ namespace super_trunfo.core
             {
                 return null;
             }
-            
+    
+
             int index = random.Next(cartas.Count);
 
             Carta cartaSelecionada = cartas[index];
@@ -73,8 +74,6 @@ namespace super_trunfo.core
 
             return cartaSelecionada;
         }
-
-
 
         public int QuantidadeDeCartas()
         {

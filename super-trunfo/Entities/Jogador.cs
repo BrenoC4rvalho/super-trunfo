@@ -13,6 +13,8 @@ namespace super_trunfo.Entities
 
         private string nome;
         private bool robo;
+        
+        //fila
         private Queue<Carta> cartas = new Queue<Carta>();
 
         public Jogador(string nome, bool robo)

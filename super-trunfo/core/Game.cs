@@ -1,10 +1,5 @@
 ﻿using super_trunfo.Entities;
 using super_trunfo.utils;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace super_trunfo.core
 {
