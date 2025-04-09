@@ -3,7 +3,7 @@ using super_trunfo.utils;
 
 namespace super_trunfo.core
 {
-    class Game
+    public class Game
     {
 
         private Queue<Jogador> jogadores = new Queue<Jogador>();
@@ -387,7 +387,12 @@ namespace super_trunfo.core
             return false;
         } 
 
-       
+        public int QuantidadeDeJogadores()
+        {
+            return jogadores.Count;
+        }
+
+
 
 
     }
