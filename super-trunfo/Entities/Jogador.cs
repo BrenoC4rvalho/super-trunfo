@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace super_trunfo.Entities
 {
        
-    class Jogador
+    public class Jogador
     {
 
         private string nome;
