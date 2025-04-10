@@ -62,6 +62,7 @@ while(jogoAtivo)
         Terminal.PausarELimpar();
     }
 
+    Terminal.PausarELimpar();
     Console.WriteLine("Deseja jogar novamente? (s/n)");
     string? resposta = Terminal.LeituraString()?.Trim().ToLower();
     jogoAtivo = (resposta == "s");

@@ -196,5 +196,50 @@ public class GameTest
         Assert.IsTrue(Math.Abs(jogador1.QuantidadeDeCartas() - jogador3.QuantidadeDeCartas()) <= 1);
     }
 
+    [TestMethod]
+    public void VerificaFimDeJogo_DeveRetornarTrue_QuandoRestarUmJogador()
+    {
+        // Arrange
+        var game = new Game();
+        var jogadorVencedor = new Jogador("Campeão", false);
+        game.AdicionarJogador(jogadorVencedor);
+
+        // Act
+        bool resultado = game.VerificaFimDeJogo();
+
+        // Assert
+        Assert.IsTrue(resultado);
+    }
+
+    [TestMethod]
+    public void VerificaFimDeJogo_DeveRetornarTrue_QuandoNaoHouverJogadores()
+    {
+        // Arrange
+        var game = new Game(); // Nenhum jogador adicionado
+
+        // Act
+        bool resultado = game.VerificaFimDeJogo();
+
+        // Assert
+        Assert.IsTrue(resultado);
+    }
+
+    [TestMethod]
+    public void VerificaFimDeJogo_DeveRetornarFalse_QuandoHouverMaisDeUmJogador()
+    {
+        // Arrange
+        var game = new Game();
+        game.AdicionarJogador(new Jogador("Jogador 1", false));
+        game.AdicionarJogador(new Jogador("Jogador 2", false));
+
+        // Act
+        bool resultado = game.VerificaFimDeJogo();
+
+        // Assert
+        Assert.IsFalse(resultado);
+    }
+
+
+
 }
 

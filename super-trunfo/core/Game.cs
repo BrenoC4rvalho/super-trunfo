@@ -371,7 +371,6 @@ namespace super_trunfo.core
             {
                 Terminal.EscreverLinhaColorida($"Fim de jogo! O jogador {jogadores.Peek().GetNome()} venceu!", ConsoleColor.Green);
                 Terminal.PularLinha();
-                Terminal.PausarELimpar();
 
                 return true;
             }
@@ -379,7 +378,6 @@ namespace super_trunfo.core
             {
                 Terminal.EscreverLinhaColorida("Fim de jogo! Todos os jogadores foram eliminados!", ConsoleColor.Red);
                 Terminal.PularLinha();
-                Terminal.PausarELimpar();
 
                 return true;
             }
