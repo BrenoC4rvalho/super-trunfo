@@ -239,7 +239,22 @@ public class GameTest
         Assert.IsFalse(resultado);
     }
 
+    [TestMethod]
+    public void ProximoJogador_DevePassarParaProximoJogador()
+    {
+        var game = new Game();
 
+        var jogador1 = new Jogador("Jogador 1", false);
+        var jogador2 = new Jogador("Jogador 2", false);
+
+        game.AdicionarJogador(jogador1);
+        game.AdicionarJogador(jogador2);
+
+        game.ProximoJogador();
+
+        // Verifica se o próximo jogador é o jogador2
+        Assert.AreEqual("Jogador 2", game.JogadorDaRodada().GetNome());
+    }
 
 }
 
