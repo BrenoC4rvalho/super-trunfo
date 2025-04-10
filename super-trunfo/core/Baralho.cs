@@ -65,7 +65,6 @@ namespace super_trunfo.core
             {
                 return null;
             }
-    
 
             int index = random.Next(cartas.Count);
 
@@ -80,6 +79,6 @@ namespace super_trunfo.core
             return cartas.Count();
         }
 
-
+        
     }
 }

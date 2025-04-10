@@ -10,7 +10,6 @@ Game superTrunfo = new Game();
 Jogador jogador = superTrunfo.CriarJogador();
 superTrunfo.AdicionarJogador(jogador);
 
-
 bool jogoAtivo = true;
 while(jogoAtivo)
 {
