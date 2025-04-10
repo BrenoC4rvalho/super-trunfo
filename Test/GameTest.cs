@@ -166,5 +166,35 @@ public class GameTest
         Assert.AreEqual(1, game.QuantidadeDeJogadores());
     }
 
+    [TestMethod]
+    public void DistribuirCartas_DeveDistribuirCartasParaTodosOsJogadores()
+    {
+        // Arrange
+        var game = new Game();
+
+        var jogador1 = new Jogador("Jogador 1", false);
+        var jogador2 = new Jogador("Jogador 2", false);
+        var jogador3 = new Jogador("Jogador 3", false);
+        var jogador4 = new Jogador("Jogador 4", false);
+
+        game.AdicionarJogador(jogador1);
+        game.AdicionarJogador(jogador2);
+        game.AdicionarJogador(jogador3);
+        game.AdicionarJogador(jogador4);
+
+        int quantidadeDeCartasAntesDeDistribuir = game.GetBaralho().QuantidadeDeCartas();
+
+        // Act
+        game.DistribuirCartas();
+
+        // Assert
+        var totalDistribuidas = jogador1.QuantidadeDeCartas() + jogador2.QuantidadeDeCartas() + jogador3.QuantidadeDeCartas() + jogador4.QuantidadeDeCartas();
+
+        Assert.AreEqual(quantidadeDeCartasAntesDeDistribuir, totalDistribuidas);
+        Assert.IsTrue(Math.Abs(jogador1.QuantidadeDeCartas() - jogador2.QuantidadeDeCartas()) <= 1);
+        Assert.IsTrue(Math.Abs(jogador2.QuantidadeDeCartas() - jogador3.QuantidadeDeCartas()) <= 1);
+        Assert.IsTrue(Math.Abs(jogador1.QuantidadeDeCartas() - jogador3.QuantidadeDeCartas()) <= 1);
+    }
+
 }
 

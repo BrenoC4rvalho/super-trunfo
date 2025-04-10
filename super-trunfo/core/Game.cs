@@ -392,6 +392,10 @@ namespace super_trunfo.core
             return jogadores.Count;
         }
 
+        public Baralho GetBaralho()
+        {
+            return this.baralho;
+        }
 
 
 
