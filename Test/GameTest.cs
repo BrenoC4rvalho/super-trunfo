@@ -256,5 +256,16 @@ public class GameTest
         Assert.AreEqual("Jogador 2", game.JogadorDaRodada().GetNome());
     }
 
+    [TestMethod]
+    public void EscolhaAtributoRobo_DeveRetornarAtributoFixo_QuandoJogadorEhRobo()
+    {
+        var game = new Game();
+        var jogadorRobo = new Jogador("Robo", true);
+        jogadorRobo.SetCarta(new Carta("A1", "Neymar", 5, 5, 5, 5, false)); // só pra não dar null
+
+        int atributo = game.EscolhaAtributoRobo(jogadorRobo);
+
+        Assert.IsTrue(atributo >= 1 && atributo <= 4, "O atributo deve estar entre 1 e 4");
+    }
 }
 
