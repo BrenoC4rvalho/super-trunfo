@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace super_trunfo.utils
 {   
-    class Terminal
+    public class Terminal
     {
         public static void EscreverColorido(string mensagem, ConsoleColor cor)
         {
