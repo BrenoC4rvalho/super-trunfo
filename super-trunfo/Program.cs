@@ -4,14 +4,11 @@ using super_trunfo.core;
 using super_trunfo.Entities;
 using super_trunfo.utils;
 
-
-
 Regras.Imprimir();
 
 Game superTrunfo = new Game();
 Jogador jogador = superTrunfo.CriarJogador();
 superTrunfo.AdicionarJogador(jogador);
-
 
 bool jogoAtivo = true;
 while(jogoAtivo)
@@ -65,6 +62,7 @@ while(jogoAtivo)
         Terminal.PausarELimpar();
     }
 
+    Terminal.PausarELimpar();
     Console.WriteLine("Deseja jogar novamente? (s/n)");
     string? resposta = Terminal.LeituraString()?.Trim().ToLower();
     jogoAtivo = (resposta == "s");

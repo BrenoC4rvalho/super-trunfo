@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace super_trunfo.core
 {
-    class Baralho
+    public class Baralho
     {
 
         private List<Carta> cartas;
@@ -65,7 +65,7 @@ namespace super_trunfo.core
             {
                 return null;
             }
-            
+
             int index = random.Next(cartas.Count);
 
             Carta cartaSelecionada = cartas[index];
@@ -74,13 +74,11 @@ namespace super_trunfo.core
             return cartaSelecionada;
         }
 
-
-
         public int QuantidadeDeCartas()
         {
             return cartas.Count();
         }
 
-
+        
     }
 }

@@ -8,11 +8,13 @@ using System.Threading.Tasks;
 namespace super_trunfo.Entities
 {
        
-    class Jogador
+    public class Jogador
     {
 
         private string nome;
         private bool robo;
+        
+        //fila
         private Queue<Carta> cartas = new Queue<Carta>();
 
         public Jogador(string nome, bool robo)

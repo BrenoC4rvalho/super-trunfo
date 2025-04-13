@@ -13,6 +13,6 @@ Este é um jogo digital inspirado no clássico Super Trunfo, desenvolvido com C#
 - 3️⃣ O adversário compara o valor do atributo.
 - 4️⃣ Quem tiver o maior valor vence a rodada e ganha a carta do oponente.
 - 5️⃣ O jogo termina quando um jogador ficar com todas as cartas!
-
+- 🃏 A carta Super Trunfo vence todas as outras cartas, exceto quando enfrenta uma carta da Categoria A — nesse caso, a comparação de atributos define o vencedor.
 
 🔗 Clone este repositório, contribua e divirta-se! 🚀

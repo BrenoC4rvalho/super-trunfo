@@ -1,14 +1,9 @@
 ﻿using super_trunfo.Entities;
 using super_trunfo.utils;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace super_trunfo.core
 {
-    class Game
+    public class Game
     {
 
         private Queue<Jogador> jogadores = new Queue<Jogador>();
@@ -376,7 +371,6 @@ namespace super_trunfo.core
             {
                 Terminal.EscreverLinhaColorida($"Fim de jogo! O jogador {jogadores.Peek().GetNome()} venceu!", ConsoleColor.Green);
                 Terminal.PularLinha();
-                Terminal.PausarELimpar();
 
                 return true;
             }
@@ -384,7 +378,6 @@ namespace super_trunfo.core
             {
                 Terminal.EscreverLinhaColorida("Fim de jogo! Todos os jogadores foram eliminados!", ConsoleColor.Red);
                 Terminal.PularLinha();
-                Terminal.PausarELimpar();
 
                 return true;
             }
@@ -392,7 +385,16 @@ namespace super_trunfo.core
             return false;
         } 
 
-       
+        public int QuantidadeDeJogadores()
+        {
+            return jogadores.Count;
+        }
+
+        public Baralho GetBaralho()
+        {
+            return this.baralho;
+        }
+
 
 
     }
