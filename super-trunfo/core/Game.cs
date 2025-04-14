@@ -90,6 +90,28 @@ namespace super_trunfo.core
             
         }
 
+        public void SorteaOrdemInicial()
+        {
+            if (jogadores.Count <= 1)
+            {
+                Terminal.EscreverLinhaColorida("É necessário ter mais de um jogador para sortear a ordem inicial", ConsoleColor.Red);
+                Terminal.PularLinha();
+            }
+
+            var jogadoresEmbaralhados = jogadores.OrderBy(j => random.Next()).ToList();
+
+            jogadores = new Queue<Jogador>(jogadoresEmbaralhados);
+
+            Terminal.EscreverLinhaColorida("Ordem inicial sorteada: ", ConsoleColor.Blue);
+            Terminal.PularLinha();
+
+            foreach (var jogador in jogadores)
+            {
+                Terminal.EscreverLinha(jogador.GetNome());
+            }
+
+        }
+
         public Jogador JogadorDaRodada()
         {
             return jogadores.Peek();
@@ -153,28 +175,6 @@ namespace super_trunfo.core
             }
 
 
-
-        }
-
-        public void SorteaOrdemInicial()
-        {
-            if (jogadores.Count <= 1)
-            {
-                Terminal.EscreverLinhaColorida("É necessário ter mais de um jogador para sortear a ordem inicial", ConsoleColor.Red);
-                Terminal.PularLinha();
-            }
-
-            var jogadoresEmbaralhados = jogadores.OrderBy(j => random.Next()).ToList();
-
-            jogadores = new Queue<Jogador>(jogadoresEmbaralhados);
-
-            Terminal.EscreverLinhaColorida("Ordem inicial sorteada: ", ConsoleColor.Blue);
-            Terminal.PularLinha();
-
-            foreach (var jogador in jogadores)
-            {
-                Terminal.EscreverLinha(jogador.GetNome());
-            }
 
         }
 
