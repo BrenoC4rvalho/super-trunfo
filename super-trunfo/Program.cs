@@ -1,5 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
+/* Alunos: Breno Carvalho, Hugo, Thomas, Yanna */ 
+
 using super_trunfo.core;
 using super_trunfo.Entities;
 using super_trunfo.utils;

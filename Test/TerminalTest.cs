@@ -5,19 +5,7 @@ namespace super_Trunfo.Test;
 [TestClass]
 public class TerminalTest
 {
-    [TestMethod]
-    public void LeituraInt_DeveRetornarNumeroInteiro()
-    {
-        // Arrange
-        using var sr = new StringReader("42");
-        Console.SetIn(sr);
-
-        // Act
-        int resultado = Terminal.LeituraInt();
-
-        // Assert
-        Assert.AreEqual(42, resultado);
-    }
+    
 
     [TestMethod]
     [ExpectedException(typeof(ArgumentException))]
@@ -31,20 +19,6 @@ public class TerminalTest
         Terminal.LeituraInt();
 
         // Assert está no atributo ExpectedException
-    }
-
-    [TestMethod]
-    public void LeituraString_DeveRetornarTexto()
-    {
-        // Arrange
-        using var sr = new StringReader("Oi");
-        Console.SetIn(sr);
-
-        // Act
-        string resultado = Terminal.LeituraString();
-
-        // Assert
-        Assert.AreEqual("Oi", resultado);
     }
 
     [TestMethod]

@@ -158,9 +158,9 @@ namespace super_trunfo.core
             {
                 int atributoEscolhido = Terminal.LeituraInt();
 
-                if (atributoEscolhido < 1 || atributoEscolhido > 5)
+                if (atributoEscolhido < 1 || atributoEscolhido > 4)
                 {
-                    Terminal.EscreverLinhaColorida("Número inválido! Escolha um número entre 1 e 5.", ConsoleColor.Red);
+                    Terminal.EscreverLinhaColorida("Número inválido! Escolha um número entre 1 e 4.", ConsoleColor.Red);
                     Terminal.PausarELimpar();
                     return EscolhaAtributoJogador(jogador);
                 }
@@ -173,8 +173,6 @@ namespace super_trunfo.core
                 Terminal.EscreverLinhaColorida("É preciso ser um número válido!", ConsoleColor.Red);
                 return EscolhaAtributoJogador(jogador);
             }
-
-
 
         }
 
@@ -323,7 +321,6 @@ namespace super_trunfo.core
             {
                 Terminal.EscreverLinha($"{jogador.GetNome()} - {jogador.QuantidadeDeCartas()} cartas");
             }
-
             Terminal.PularLinha();
         }
 

@@ -141,11 +141,11 @@ namespace super_trunfo.Entities
             Terminal.PularLinha();
 
             Terminal.EscreverColorido("3 - Força: ", ConsoleColor.Blue);
-            Terminal.Escrever(Convert.ToString(this.popularidade));
+            Terminal.Escrever(Convert.ToString(this.forca));
             Terminal.PularLinha();
 
             Terminal.EscreverColorido("4 - Sorte: ", ConsoleColor.Blue);
-            Terminal.Escrever(Convert.ToString(this.popularidade));
+            Terminal.Escrever(Convert.ToString(this.sorte));
             Terminal.PularLinha();
 
         }
